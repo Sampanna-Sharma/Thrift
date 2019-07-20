@@ -37,12 +37,8 @@ def getcomment(soup, d='div', c='content'):
         None
 
 
-d = dict()
-
-urls = ['https://bestdealsnepal.com.np/product/all-in-one-universal-international-plug-adapter-2-usb-port-world-travel-ac-power-charger-adaptor-with-au-us-uk-eu-converter-plug/']
-
-
 def getdata(url):
+    d = dict()
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'lxml')
     price = getprice(soup, 'price', 'span')
@@ -51,7 +47,3 @@ def getdata(url):
     comment = [getcomment(i, 'div', 'content') for i in soup.find_all('div', class_='item-content')]
     d['bestdeals'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment}
     return d
-
-
-for url in urls:
-    print(getdata(url))

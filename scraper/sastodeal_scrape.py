@@ -38,8 +38,8 @@ def getcomment(soup, d='div', c='content'):
         None
 
 
-
 def getdata(url):
+    d = dict()
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'lxml')
     price = getprice(soup, 'ul', 'row mrp-outer', 'li')
@@ -50,5 +50,3 @@ def getdata(url):
     d['sastodeal'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'image_link': image_link}
 
     return d
-
-=

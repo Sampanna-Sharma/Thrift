@@ -39,6 +39,7 @@ def getcomment(soup, d='div', c='content'):
 
 
 def getdata(url):
+    d = dict()
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'lxml')
     price = getprice(soup, 'PriceArea')

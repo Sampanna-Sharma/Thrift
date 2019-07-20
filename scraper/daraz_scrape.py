@@ -38,8 +38,8 @@ def getcomment(soup, d='div', c='content'):
         None
 
 
-
 def getdata(url):
+    d = dict()
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'lxml')
     price = getprice(soup, 'div', 'pdp-product-price', 'span')
@@ -49,4 +49,3 @@ def getdata(url):
     image_link = soup.find('img', class_='pdp-mod-common-image gallery-preview-panel__image')['src']
     d['daraz'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'image_link': image_link}
     return d
-
