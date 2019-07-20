@@ -51,7 +51,11 @@ def getdata(url):
     rating = getrating(soup, 'div', 'score')
     comment = [getcomment(i, 'div', 'content') for i in soup.find_all('div', class_='item-content')]
     image_link = soup.find('div', id='surround').find('img', class_='cloudzoom')['src']
+<<<<<<< HEAD
     d['smartdoko'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'image_link': image_link, 'url' : url}
+=======
+    d['nepbay'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'image_link': image_link}
+>>>>>>> 9caf55906f41812fc2b4d050d4765ac2db5d12b2
     return d
 
 

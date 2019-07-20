@@ -37,6 +37,10 @@ def getcomment(soup, d='div', c='content'):
         None
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9caf55906f41812fc2b4d050d4765ac2db5d12b2
 def getdata(url):
     d = dict()
     r = requests.get(url)
