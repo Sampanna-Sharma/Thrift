@@ -19,6 +19,5 @@ def scrape(url):
                     link.append(a.split('&')[0])
             except:
                 pass
-    print(link)
-    # print(headings)
+    return link
 

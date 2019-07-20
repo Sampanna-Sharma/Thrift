@@ -1,20 +1,22 @@
 from flask import Flask, jsonify, request
-import requests
-import json
 
+import sys
+sys.path.insert(0,'../scraper')
+from google_scrape import scrape
 app = Flask(__name__)
 
 @app.route('/',methods = ['GET'])
 def search_web():
     product_name = request.args.get('ProductName')
     link =f"https://www.google.com/search?hl=en&as_q={product_name}+card&as_epq=&as_oq=&as_eq=&as_nlo=&as_nhi=&lr=&cr=countryNP&as_qdr=all&as_sitesearch=&as_occt=title&safe=images&as_filetype=&as_rights="
-    r = requests.get(link)
+    result = scrape(link)
+    print(result)
     # result = json.loads(r.text)
-    result = dict(item = ["item1", "item2", "item3"],
-                url = ["item1", "item2", "item3"],
-                price = ["item1", "item2", "item3"])
-    return jsonify(result)
+    # result = dict(item = ["item1", "item2", "item3"],
+    #             url = ["item1", "item2", "item3"],
+    #             price = ["item1", "item2", "item3"])
+    return str(result)
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(debug = True,host = "0.0.0.0")
 
