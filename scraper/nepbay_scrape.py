@@ -47,5 +47,5 @@ def getdata(url):
     rating = getrating(soup, 'div', 'score')
     comment = [getcomment(i, 'div', 'content') for i in soup.find_all('div', class_='item-content')]
     image_link = soup.find('div', class_='MainImage').find('img', class_='xzoom')['src']
-    d['nepbay'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'image_link': image_link,'url'=url}
+    d['nepbay'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'image_link': image_link,'url':url}
     return d

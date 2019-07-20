@@ -45,5 +45,5 @@ def getdata(url):
     title = gettitle(soup, 'title')
     rating = getrating(soup, 'div', 'score')
     comment = [getcomment(i, 'div', 'content') for i in soup.find_all('div', class_='item-content')]
-    d['bestdeals'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'url' = url}
+    d['bestdeals'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'url' : url}
     return d
