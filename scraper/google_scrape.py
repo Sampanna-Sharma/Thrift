@@ -20,5 +20,8 @@ def scrape(url):
             except:
                 pass
     return link
-    # print(headings)
+<<<<<<< HEAD
+=======
+   
+>>>>>>> scraper
 

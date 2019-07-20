@@ -3,12 +3,11 @@ import csv
 import requests
 
 from bs4 import BeautifulSoup
-import pandas as pd
 
 
-def getprice(soup, d='div', c='pdp-product-price', s='span'):
+def getprice(soup, c='pdp-product-price', s='span'):
     try:
-        ret = soup.find(d, class_=c).find(s).text
+        ret = soup.find('p', class_=c).find(s).text[3:]
         return ret
     except(AttributeError):
         None
@@ -16,7 +15,7 @@ def getprice(soup, d='div', c='pdp-product-price', s='span'):
 
 def gettitle(soup, title='title'):
     try:
-        ret = soup.find(title).text.split(':')[0]
+        ret = soup.find(title).text.split('|')[0]
         return ret
     except(AttributeError):
         None
@@ -38,15 +37,21 @@ def getcomment(soup, d='div', c='content'):
         None
 
 
+d = dict()
+
+urls = ['https://bestdealsnepal.com.np/product/all-in-one-universal-international-plug-adapter-2-usb-port-world-travel-ac-power-charger-adaptor-with-au-us-uk-eu-converter-plug/']
+
 
 def getdata(url):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'lxml')
-    price = getprice(soup, 'div', 'pdp-product-price', 'span')
+    price = getprice(soup, 'price', 'span')
     title = gettitle(soup, 'title')
     rating = getrating(soup, 'div', 'score')
     comment = [getcomment(i, 'div', 'content') for i in soup.find_all('div', class_='item-content')]
-    image_link = soup.find('img', class_='pdp-mod-common-image gallery-preview-panel__image')['src']
-    d['daraz'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'image_link': image_link}
+    d['bestdeals'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment}
     return d
 
+
+for url in urls:
+    print(getdata(url))
