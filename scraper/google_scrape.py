@@ -1,15 +1,24 @@
 import bs4 as bs
 import requests
+import re
 
-
-url = "https://www.google.com/search?hl=en&as_q=buy+sound+card&as_epq=&as_oq=&as_eq=&as_nlo=&as_nhi=&lr=&cr=countryNP&as_qdr=all&as_sitesearch=&as_occt=title&safe=images&as_filetype=&as_rights="
 def scrape(url):
+    link = []
     r = requests.get(url)
-    # print(r.text)
+    #print(r.text)
     soup = bs.BeautifulSoup(r.text,'lxml')
-
-    
-    print(headings)
-
+    #urls = re.findall('^(http|https)://', r.text)
+    #print(urls)
+    data = soup.find_all('div',{'class':'jfp3ef'})
+    for dat in data:
+        for links in dat.find_all('a'):
+            a =links["href"].split('=')[1]
+            #print(a)
+            try:
+                if "http" in a:
+                    link.append(a.split('&')[0])
+            except:
+                pass
+    print(link)
     # print(headings)
-scrape(url)
+
