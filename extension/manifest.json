@@ -1,0 +1,24 @@
+{
+	"manifest_version": 2, 
+	"name": "ABC",
+	"version": "1",
+	"description": "Saeed Translate for Chrome",
+	 "icons": {
+		"16": "images/get_started16.png"
+	  },
+	"content_scripts": [ {
+		  "all_frames": true,
+		  "js": [ "contentScript.js" ],
+		  "matches": [ "http://*/*", "https://*/*" ],
+		  "run_at": "document_start"
+	   } ],
+	"background": {
+		"scripts": ["background.js"]
+	  },
+	"permissions": [
+		"contextMenus",
+		"background",
+		"tabs"
+	]
+	
+	}
