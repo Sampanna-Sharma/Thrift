@@ -38,11 +38,6 @@ def getcomment(soup, d='div', c='content'):
         None
 
 
-d = dict()
-
-urls = ['https://hamrobazaar.com/i1631584-usb-sound-card-5-1.html']
-
-
 def getdata(url):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'lxml')
@@ -56,12 +51,3 @@ def getdata(url):
     d['sastodeal'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'image_link': image_link}
 
     return d
-
-
-print(getdata(urls[0]))
-# for url in urls:
-#     print(getdata(url))
-
-# print(r.text)
-# x = r.find_all('div', class_='pdp-mod-product-badge-wrapper')
-# print(x.text)
