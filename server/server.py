@@ -9,14 +9,14 @@ app = Flask(__name__)
 @app.route('/',methods = ['GET'])
 def search_web():
     product_name = request.args.get('ProductName')
-    result = []
+    result = dict()
     links =f"https://www.google.com/search?hl=en&as_q={product_name}&as_epq=&as_oq=&as_eq=&as_nlo=&as_nhi=&lr=&cr=countryNP&as_qdr=all&as_sitesearch=&as_occt=title&safe=images&as_filetype=&as_rights="
     links = scrape(links)
-    for link in links:
+    for i, link in enumerate(links):
         if "daraz" in link:
             response = getdata(link)
-            result.append(response)
-    return str(result)
+            result[str(i)] = response
+    return jsonify(result)
 
 if __name__ == "__main__":
     app.run(debug = True,host = "0.0.0.0")
