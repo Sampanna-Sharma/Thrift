@@ -39,6 +39,7 @@ def getcomment(soup, d='div', c='content'):
 
 
 def getdata(url):
+    d = dict()
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'lxml')
     price = getprice(soup, 'PriceArea')
@@ -46,5 +47,5 @@ def getdata(url):
     rating = getrating(soup, 'div', 'score')
     comment = [getcomment(i, 'div', 'content') for i in soup.find_all('div', class_='item-content')]
     image_link = soup.find('div', class_='MainImage').find('img', class_='xzoom')['src']
-    d['nepbay'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'image_link': image_link}
+    d['nepbay'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'image_link': image_link,'url':url}
     return d
