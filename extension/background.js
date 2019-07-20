@@ -1,26 +1,29 @@
 var text = "";
+response=[];
+var product_name="";
 
 chrome.extension.onRequest.addListener(onRequest);
 
-function onRequest(request, sender, sendResponse) {
-   let xhr = new XMLHttpRequest();
-   var product_name=request.action.toString(); 
-   var text= "http://127.0.0.1:5000/?ProductName="+product_name;
-   xhr.open("GET", text);
-   xhr.send();
-  response=[];
-  xhr.onload = function(){
-    var response = xhr.response;
-    response= JSON.parse(response);
-    console.log(response.item[0]);
-  }
-
+function onRequest(info, tab) {
+  product_name = info.selectionText;
+  //console.log(selection);
 };
 
 //create new tab of selected texxt
 chrome.contextMenus.onClicked.addListener(function(tab) {
-  chrome.tabs.create({url: text});
+  
+  let xhr = new XMLHttpRequest();
+  var text= "http://35.173.235.215:5000/?ProductName="+product_name.replace(/ /g,"%20");
+  
+  console.log(text);
+   
+   xhr.open("GET", text);
+   xhr.send();
+  xhr.onload = function(){
+  var response = xhr.response;
+  console.log(response);
+  }
 });
 
 //create contextMenu
-chrome.contextMenus.create({title:"Search '%s' on",contexts: ["selection"]});
+chrome.contextMenus.create({title:"Search '%s' on",contexts: ["all"], "onclick" : onRequest});
