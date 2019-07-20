@@ -38,10 +38,6 @@ def getcomment(soup, d='div', c='content'):
         None
 
 
-d = dict()
-
-urls = ['https://www.daraz.com.np/products/yunteng-combo-of-1288-selfie-stick-with-monopod-yt-228-tripod-i412207-s15304776.html?spm=a2a0e.searchlistcategory.list.1.5d9f104cJs1c0N&search=1', 'https://www.daraz.com.np/products/xo-s21-extreme-bass-in-ear-earphone-i100234623-s1020488869.html?spm=a2a0e.searchlistcategory.list.1.8af43ae7ZU1oq5&search=1', 'https://www.daraz.com.np/products/abc-5-port-multiplug-i113647-s723233.html']
-
 
 def getdata(url):
     r = requests.get(url)
@@ -54,10 +50,3 @@ def getdata(url):
     d['daraz'] = {'title': title, 'price': price, 'rating': rating, 'comment': comment, 'image_link': image_link}
     return d
 
-
-# for url in urls:
-print(getdata(urls[0]))
-
-# print(r.text)
-# x = r.find_all('div', class_='pdp-mod-product-badge-wrapper')
-# print(x.text)

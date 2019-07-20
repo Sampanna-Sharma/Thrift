@@ -38,10 +38,6 @@ def getcomment(soup, d='div', c='content'):
         None
 
 
-d = dict()
-
-urls = ['https://www.sastodeal.com/sastodeal/pr--88483', 'https://www.sastodeal.com/sastodeal/pr-abc-5-way-multi-plug-with-individual-switches-72573']
-
 
 def getdata(url):
     r = requests.get(url)
@@ -55,11 +51,4 @@ def getdata(url):
 
     return d
 
-
-print(getdata(urls[0]))
-# for url in urls:
-#     print(getdata(url))
-
-# print(r.text)
-# x = r.find_all('div', class_='pdp-mod-product-badge-wrapper')
-# print(x.text)
+=
