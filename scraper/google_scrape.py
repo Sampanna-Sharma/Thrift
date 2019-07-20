@@ -20,4 +20,8 @@ def scrape(url):
             except:
                 pass
     return link
+<<<<<<< HEAD
+=======
+   
+>>>>>>> scraper
 

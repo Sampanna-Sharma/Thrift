@@ -16,7 +16,7 @@ def getprice(soup, d='div', c='pdp-product-price', li='li'):
 
 def gettitle(soup, title='title'):
     try:
-        ret = soup.find(title).text.split('|')[0]
+        ret = soup.find_all('span',title)
         return ret
     except(AttributeError):
         None
@@ -38,12 +38,18 @@ def getcomment(soup, d='div', c='content'):
         None
 
 
+d = dict()
+
+urls = ['https://hamrobazaar.com/i1631584-usb-sound-card-5-1.html']
+
 
 def getdata(url):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'lxml')
-    price = getprice(soup, 'ul', 'row mrp-outer', 'li')
+    # price = getprice(soup, 'ul', 'row mrp-outer', 'li')
+    print(r.text)
     title = gettitle(soup, 'title')
+    print(title)
     rating = getrating(soup, 'div', 'fullWidth writeReview', 'li', 'reviewCount')
     comment = [getcomment(i, 'div', 'content') for i in soup.find_all('div', class_='item-content')]
     image_link = soup.find('figure').find('img')['src']
@@ -51,4 +57,11 @@ def getdata(url):
 
     return d
 
-=
+
+print(getdata(urls[0]))
+# for url in urls:
+#     print(getdata(url))
+
+# print(r.text)
+# x = r.find_all('div', class_='pdp-mod-product-badge-wrapper')
+# print(x.text)
