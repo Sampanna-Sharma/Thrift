@@ -2,7 +2,7 @@ var text = "";
 response=[];
 var product_name="";
 
-chrome.extension.onRequest.addListener(onRequest);
+//chrome.extension.onRequest.addListener(onRequest);
 
 function onRequest(info, tab) {
   product_name = info.selectionText;
@@ -20,10 +20,17 @@ chrome.contextMenus.onClicked.addListener(function(tab) {
    xhr.open("GET", text);
    xhr.send();
   xhr.onload = function(){
-  var response = xhr.response;
+  response = xhr.response;
   console.log(response);
   }
+
+  chrome.runtime.sendMessage({data :response }, function(response){
+
+  });
+  
 });
 
+
+
 //create contextMenu
-chrome.contextMenus.create({title:"Search '%s' on",contexts: ["all"], "onclick" : onRequest});
+chrome.contextMenus.create({title:"Search '%s' on",contexts: ["all"], "onclick" : onRequest, "id": "parent"});
