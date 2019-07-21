@@ -23,7 +23,3 @@ def scrape(url):
     return link
 
 
-<< << << < HEAD
-== == == =
-
->>>>>> > scraper
