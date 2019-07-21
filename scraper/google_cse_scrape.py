@@ -8,7 +8,11 @@ def google_scrape(product_name):
     print(url)
     r =requests.get(url)
     result = json.loads(r.text)
-    for item in result["items"]:
-        response.append(item["link"])
+    try:
+        for item in result["items"]:
+            response.append(item["link"])
+    
+    except:
+        print("no result for the search term")
     
     return response
