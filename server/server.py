@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-
+import threading 
 import sys
 sys.path.insert(0,'../scraper')
 from google_cse_scrape import google_scrape
@@ -10,30 +10,47 @@ from sastodeal_scrape import getdata as sastodeal_getdata
 app = Flask(__name__)
 
 
+def extactor(link):
+    if "daraz" in link:
+        return daraz_getdata
+
+    elif "bestdeals" in link:
+        return bestdeals_getdata
+
+    elif "sastodeal" in link:
+        return sastodeal_getdata
+    
+    elif "nepbay" in link:
+        return nepbay_getdata
+    
+    else:
+        return lambda x: "None"
+
+
+def extract_info(link,result):
+    extractor_func = extactor(link)
+    response = extractor_func(link)
+    if response != "None":
+        result.append(response)
+
+
 @app.route('/',methods = ['GET'])
 def search_web():
+    result = []
     product_name = request.args.get('ProductName')
-    result = dict()
     links = google_scrape(product_name)
+    threads = []
     for i, link in enumerate(links):
         print(link)
         if "?" in link:
             continue
-        if "daraz" in link:
-            response = daraz_getdata(link)
-            result[str(i)] = response
-        
-        elif "sastodeal" in link:
-            response = sastodeal_getdata(link)
-            result[str(i)] = response
-        
-        elif "bestdeals" in link:
-            response = bestdeals_getdata(link)
-            result[str(i)] = response
-        
-        elif "nepbay" in link:
-            response = nepbay_getdata(link)
-            result[str(i)] = response
+
+        t = threading.Thread(target=extract_info, args=(link,result))
+        t.start()
+        threads.append(t)
+    
+    for thread in threads:
+        thread.join()
         
     return jsonify(result)
 
