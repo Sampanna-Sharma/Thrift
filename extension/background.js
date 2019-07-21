@@ -21,6 +21,7 @@ chrome.contextMenus.onClicked.addListener(function(tab) {
    xhr.send();
   xhr.onload = function(){
   response = xhr.response;
+  //window.open("popup.html","extension_popup","width=300,height=400,status=no,scrollbar=yes,resizable=no")
   console.log(response);
   }
 

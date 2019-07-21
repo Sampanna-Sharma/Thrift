@@ -9,7 +9,7 @@
 	  "browser_action" : {
 		  "default_icon" : "images/get_started16.png",
 		  "default_popup" : "popup.html",
-		  "default_title" : "sasto"
+		  "default_title" : "thrift"
 	  },
 	"content_scripts": [ {
 		  "all_frames": true,
