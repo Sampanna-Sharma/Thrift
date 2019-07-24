@@ -32,8 +32,6 @@ $ cd server
 $ python server.py
 ```
 
-## Deployment
-The server is live at http://35.173.235.215:5000/ using Amazon Web Services
 
 ## Built With
 
