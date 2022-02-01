@@ -2,7 +2,8 @@
 
 # Thrift
 
-Thrift is a chrome extension that compares price of product from different e-commerce sites. 
+Thrift is a chrome extension that compares price of product from different e-commerce sites.
+[![Alternate Text]({image-url})]({https://www.youtube.com/watch?v=J2XgRAu0dnQ} "Link Title")
 
 ## Getting Started
 
